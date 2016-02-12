@@ -10,7 +10,7 @@ GraphQLString
 
 let Schema = (service, id) => {
     let bookType = new GraphQLObjectType({
-        name: 'Counter',
+        name: 'Books',
         fields: () => ({
             _id: { type: GraphQLInt },
             title: { type: GraphQLString },
