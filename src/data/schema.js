@@ -60,7 +60,7 @@ let Schema = (service, id) => {
             urlField: { type: GraphQLString },
 
             linkField: { type: GraphQLString },
-
+            
         })
     });
 
@@ -72,7 +72,10 @@ let Schema = (service, id) => {
                 book: {
                     type: new GraphQLList(bookType),
                     resolve: () => {
-                        service.getBookById(id);
+                     [
+                        service.getBookById(id)
+                    ]
+                    
                     }
                 }
 

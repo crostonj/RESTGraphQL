@@ -8,8 +8,8 @@
     "start": "node ./lib/app.js"
   },
   "repository": {
-      "type": "git",
-      "url": "https://github.com/crostonj/goodread_graphql.git"
+    "type": "git",
+    "url": "https://github.com/crostonj/goodread_graphql.git"
   },
   "author": "Jeff Croston",
   "license": "ISC",
@@ -20,6 +20,8 @@
   "dependencies": {
     "express": "^4.13.4",
     "express-graphql": "^0.4.9",
-    "graphql": "^0.4.16"
+    "graphql": "^0.4.16",
+    "http": "0.0.0",
+    "xml2js": "^0.4.16"
   }
 }
