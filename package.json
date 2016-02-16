@@ -5,7 +5,9 @@
   "main": "lib/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./lib/app.js"
+    "start": "node ./lib/app.js",
+    "debug-start": "node --debug ./lib/app.js",
+    "debug": "node-debug ./lib/app.js"
   },
   "repository": {
     "type": "git",
@@ -18,10 +20,12 @@
     "babel-cli": "^6.5.1"
   },
   "dependencies": {
+    "axios": "^0.9.1",
     "express": "^4.13.4",
     "express-graphql": "^0.4.9",
     "graphql": "^0.4.16",
     "http": "0.0.0",
+    "promise": "^7.1.1",
     "xml2js": "^0.4.16"
   }
 }

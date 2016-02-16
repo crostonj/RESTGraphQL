@@ -17,14 +17,14 @@
 				"NODE_ENV": "development"
 			},
 			"externalConsole": false,
-			"sourceMaps": false,
+			"sourceMaps": true,
 			"outDir": null
 		},
 		{
 			"name": "Attach",
 			"type": "node",
 			"request": "attach",
-			"port": 5858,
+			"port": 4000,
 			"sourceMaps": false,
 			"outDir": null,
 			"localRoot": "${workspaceRoot}",

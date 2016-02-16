@@ -4,6 +4,18 @@ var parser = xml2json.Parser({
     explicitArray: false
 });
 
+import {
+GraphQLObjectType,
+GraphQLNonNull,
+GraphQLSchema,
+GraphQLInt,
+GraphQLList,
+GraphQLString
+} from 'graphql';
+
+import Promise from 'Promise';
+import axios from 'Axios'
+
 var goodreadsService = function () {
 
     var getBookById = function (id) {
@@ -12,23 +24,19 @@ var goodreadsService = function () {
             path: '/book/show/' + id + '?format=xml&key=bJU4WwEpv8QaM42iR586YA'
         };
 
-        var callback = function (response) {
-            var str = '';
 
-            response.on('data', function (chunk) {
-                str += chunk;
+        axios.get(options.host + options.path)
+            .then((response) => {
+                console.log(response);
+
+                return response;
+            })
+            .catch((response) => {
+                console.log(response);
+
+                return response;
             });
 
-            response.on('end', function () {
-                console.log(str);
-
-                parser.parseString(str, function (err, result) {
-                    return result.GoodreadsResponse.book;
-                });
-            });
-        };
-
-        http.request(options, callback).end();
     };
 
     return {
