@@ -12,11 +12,8 @@ import queryType from './Types/book.js';
 
 let Schema = (id) => {
 
-    Console.Log(id);
     let schema = new GraphQLSchema({
         query: queryType
-        
-  
         //mutation: ...
     });
 
