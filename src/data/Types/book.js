@@ -6,7 +6,11 @@ GraphQLNonNull,
 GraphQLList
 } from 'graphql';
 
+import request from 'superagent';
+import { Promise } from 'es6-promise';
 import xml2json from 'xml2js';
+import superagentxml2jsparser from 'superagent-xml2jsparser';
+import http from 'http'
 
 var parser = xml2json.Parser({
     explicitArray: false
@@ -14,27 +18,7 @@ var parser = xml2json.Parser({
 
 
 import axios from 'Axios'
-import querystring from 'querystring'
-
-function GetIt() {
-    var options = {
-        host: 'www.goodreads.com',
-        path: '/book/show/' + 50 + '?format=xml&key=bJU4WwEpv8QaM42iR586YA'
-    };
-
-    axios.get(options.host + options.path)
-        .then((response) => {
-            parser.parseString(response, (err, result) => {
-                console.log(result.GoodreadsResponse.book);
-                return result.GoodreadsResponse.book;
-            });
-
-        })
-        .catch((response) => {
-
-            return response;
-        });
-}
+//import querystring from 'querystring'
 
 
 let bookType = new GraphQLObjectType({
@@ -42,7 +26,7 @@ let bookType = new GraphQLObjectType({
     fields: () => ({
         id: { 
             type: GraphQLInt,
-            resolve: it => it.id
+            resolve: (book) => book.id
         },
         title: { type: GraphQLString },
         isbn: { type: GraphQLString },
@@ -52,7 +36,7 @@ let bookType = new GraphQLObjectType({
         marketplace_id: { type: GraphQLString },
         country_code: { type: GraphQLString },
         image_url: { type: GraphQLString,
-            resolve: it => it.image_url},
+            resolve: (book) =>book.image_url},
         small_image_url: { type: GraphQLString },
         publication_year: { type: GraphQLString },
         publication_month: { type: GraphQLString },
@@ -85,31 +69,59 @@ let queryType = new GraphQLObjectType({
                 }
             },
             resolve: (parent, args, ast) => {
-
-
-                let googleAPIClient = axios.create();
+                //http://stackoverflow.com/questions/19327297/node-http-get-how-do-i-get-at-the-xml-returned-so-i-can-do-stuff-with-it
                 
-                googleAPIClient.interceptors.request.use((config) => {
-                        return new Promise((resolve) => {
-                     })
-                    });
-
-                googleAPIClient.get('http://www.goodreads.com/book/show/' + args.id + '/?format=xml&key=bJU4WwEpv8QaM42iR586YA', {
-                    'Content-Type': 'text/html'
-                })
-                    .then((response) => {
-                        console.log(response.status); // ex.: 200
-                        parser.parseString(response.data, (err, result) => {
-                            console.log(result.GoodreadsResponse.book);
-                            return result.GoodreadsResponse.book;
+                 var options = {
+                     hostname: "www.goodreads.com",
+                     path: '/book/show/' + args.id + '/?format=xml&key=bJU4WwEpv8QaM42iR586YA'
+                };
+                return new Promise(function(resolve, reject) {
+                    var gsaReq =  http.default.get(options, function (response) {
+                        var completeResponse = '';
+                        response.on('data', function (chunk) {
+                            completeResponse += chunk;
                         });
-                    })
-                    .catch((response) => {
-                        console.log(response.status); // ex.: 200
-                        return response;
+                        response.on('end', function () {
+                            parser.parseString(completeResponse, (err, result) => {
+                                resolve(result.GoodreadsResponse.book)
+                            })
+                        });
+                    }).on('error', function (e) {
+                        console.log('problem with request: ' + e.message);
                     });
+            });
+              //  return new Promise(function(resolve, reject) {
+              //      request                       
+              //          .get('http://www.goodreads.com/book/show/' + args.id + '/?format=xml&key=bJU4WwEpv8QaM42iR586YA')
+              //          .accept('xml')
+              //          .parse(superagentxml2jsparser)
+              //          .end((err, res) => {
+              //              if (!err) {
+              //                 console.log(res);
+              //                  resolve(res.body);
+              //              } 
+              //          });
+              //  });
+  
+             //   let googleAPIClient = axios.create();
+             //   googleAPIClient.get('http://www.goodreads.com/book/show/' + args.id + '/?format=xml&key=bJU4WwEpv8QaM42iR586YA', {
+             //       'Content-Type': 'text/html'
+             //   })
+             //   .then((response) => {
+             //       console.log(response.status); // ex.: 200
+             //       parser.parseString(response.data, (err, result) => {
+             //           console.log(result.GoodreadsResponse.book);
+             //           return new Promise((resolve, reject) => {
+             //               resolve(result.GoodreadsResponse.book)
+             //           })
+             //      });
+             //   })
+             //   .catch((response) => {
+             //       console.log(response.status); // ex.: 200
+             //       return response;
+             //   });
+                     
             }
-
         }
     })
 });

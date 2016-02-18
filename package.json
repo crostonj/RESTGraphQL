@@ -22,12 +22,16 @@
   "dependencies": {
     "axios": "^0.9.1",
     "dataloader": "^1.1.0",
+    "es6-promise": "^3.1.2",
     "express": "^4.13.4",
     "express-graphql": "^0.4.9",
     "graphql": "^0.4.16",
+    "graphql-rest-connections": "^1.0.0",
     "http": "0.0.0",
     "promise": "^7.1.1",
     "querystring": "^0.2.0",
+    "superagent": "^1.7.2",
+    "superagent-xml2jsparser": "^0.1.1",
     "xml2js": "^0.4.16"
   }
 }
