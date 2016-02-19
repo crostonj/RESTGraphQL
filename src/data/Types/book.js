@@ -74,9 +74,10 @@ let queryType = new GraphQLObjectType({
                  var options = {
                      hostname: "www.goodreads.com",
                      path: '/book/show/' + args.id + '/?format=xml&key=bJU4WwEpv8QaM42iR586YA'
+                     
                 };
                 return new Promise(function(resolve, reject) {
-                    var gsaReq =  http.default.get(options, function (response) {
+                    var gsaReq =  http.get(options, function (response) {
                         var completeResponse = '';
                         response.on('data', function (chunk) {
                             completeResponse += chunk;

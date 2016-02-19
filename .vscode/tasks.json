@@ -23,7 +23,7 @@
             "suppressTaskName": true,
             "isBuildCommand": true,
             "isWatching": true,
-            "args": ["src", "-d", "lib", "-w"]            
+            "args": ["src", "-d", "lib", "-w", "--source-maps"]            
         }
     ]
 }
