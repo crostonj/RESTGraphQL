@@ -8,12 +8,12 @@ GraphQLString
 } from 'graphql';
 
 import axios from 'Axios';
-import queryType from './Types/book.js';
+import rootQuery from './rootQuery.js';
 
 let Schema = (id) => {
 
     let schema = new GraphQLSchema({
-        query: queryType
+        query: rootQuery
         //mutation: ...
     });
 
