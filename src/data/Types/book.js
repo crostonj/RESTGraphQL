@@ -55,6 +55,14 @@ let bookType = new GraphQLObjectType({
     })
 });
 
+let borrowerType =  new GraphQLObjectType({
+    name: "Borrower",
+    fields: ()  => ({
+        Name: {type: GraphQLString},
+        Age: {type: GraphQLString}
+        
+    })
+});
 
 let queryType = new GraphQLObjectType({
     name: 'Query',
@@ -70,62 +78,40 @@ let queryType = new GraphQLObjectType({
             },
             resolve: (parent, args, ast) => {
                 //http://stackoverflow.com/questions/19327297/node-http-get-how-do-i-get-at-the-xml-returned-so-i-can-do-stuff-with-it
-                
                  var options = {
                      hostname: "www.goodreads.com",
                      path: '/book/show/' + args.id + '/?format=xml&key=bJU4WwEpv8QaM42iR586YA'
-                     
                 };
-                return new Promise(function(resolve, reject) {
-                    var gsaReq =  http.get(options, function (response) {
+
+                return new Promise((resolve, reject) => {
+                    http.get(options,  (response) => {
                         var completeResponse = '';
-                        response.on('data', function (chunk) {
+                        response.on('data',  (chunk) => {
                             completeResponse += chunk;
                         });
-                        response.on('end', function () {
+                        response.on('end',  () => {
                             parser.parseString(completeResponse, (err, result) => {
                                 resolve(result.GoodreadsResponse.book)
                             })
                         });
-                    }).on('error', function (e) {
-                        console.log('problem with request: ' + e.message);
-                    });
-            });
-              //  return new Promise(function(resolve, reject) {
-              //      request                       
-              //          .get('http://www.goodreads.com/book/show/' + args.id + '/?format=xml&key=bJU4WwEpv8QaM42iR586YA')
-              //          .accept('xml')
-              //          .parse(superagentxml2jsparser)
-              //          .end((err, res) => {
-              //              if (!err) {
-              //                 console.log(res);
-              //                  resolve(res.body);
-              //              } 
-              //          });
-              //  });
-  
-             //   let googleAPIClient = axios.create();
-             //   googleAPIClient.get('http://www.goodreads.com/book/show/' + args.id + '/?format=xml&key=bJU4WwEpv8QaM42iR586YA', {
-             //       'Content-Type': 'text/html'
-             //   })
-             //   .then((response) => {
-             //       console.log(response.status); // ex.: 200
-             //       parser.parseString(response.data, (err, result) => {
-             //           console.log(result.GoodreadsResponse.book);
-             //           return new Promise((resolve, reject) => {
-             //               resolve(result.GoodreadsResponse.book)
-             //           })
-             //      });
-             //   })
-             //   .catch((response) => {
-             //       console.log(response.status); // ex.: 200
-             //       return response;
-             //   });
-                     
+                    }).on('error', (e) => {});
+                });
+            }
+        },
+        Borrower: {
+            type: borrowerType,
+            resolve: (parent, args, ast) => {
+                
+                const borrower = {
+                        Name: 'Jeff',
+                        Age: '42'
+                    };
+                return new Promise((resolve, reject) =>  {
+                    resolve(borrower);
+                });                
             }
         }
     })
 });
-
 
 export default queryType;
