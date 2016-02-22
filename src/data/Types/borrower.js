@@ -16,9 +16,7 @@ let borrowerType =  new GraphQLObjectType({
         FirstName:{type: GraphQLString},
         MiddleInitial:{type: GraphQLString},
         LastName:{type: GraphQLString},
-        Address: {type: addressType,
-            resolve: () => {return (bor) => bor.Address}
-        }
+        Address: {type: addressType}
     })
 });
 
