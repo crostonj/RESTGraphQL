@@ -9,8 +9,6 @@ GraphQLList
 let addressType = new GraphQLObjectType({
     name: 'Address',
     fields: () => ({
-        
-        Id: { type: GraphQLString },
         IsActive:  { type: GraphQLString },
         IsValid: { type: GraphQLString },
         AddDate: { type: GraphQLString },
@@ -26,10 +24,7 @@ let addressType = new GraphQLObjectType({
         AddressType: { type: GraphQLString },
         Priority: { type: GraphQLString },
         AddressStatus: { type: GraphQLString }
-    }),
-    resolve: () => {return (bor) => bor.Address}
-    
-    
+    })   
 });
 
 export default addressType;

@@ -7,6 +7,8 @@ GraphQLList
 } from 'graphql';
 
 import addressType from './address.js';
+import phoneType from './phone.js';
+import loanType from './loan.js';
 
 let borrowerType =  new GraphQLObjectType({
     name: "Borrower",
@@ -16,7 +18,10 @@ let borrowerType =  new GraphQLObjectType({
         FirstName:{type: GraphQLString},
         MiddleInitial:{type: GraphQLString},
         LastName:{type: GraphQLString},
-        Address: {type: addressType}
+        Address: {type: addressType},
+        Addresses: {type: new GraphQLList(addressType)},
+        Phones:  {type: new GraphQLList(phoneType)},
+        Loans: {type: new GraphQLList(loanType)}
     })
 });
 
