@@ -26,7 +26,7 @@ let phoneType = new GraphQLObjectType({
         CpcFlag: { type: GraphQLString },
         CpcDate: { type: GraphQLString },
         IsInternational: { type: GraphQLBoolean },
-        InternationalPhoneExchange: { type: GraphQLString },
+        InternationalPhoneExchange: { type: GraphQLString }
     })
 });
 
