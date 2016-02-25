@@ -14,15 +14,15 @@ http://itidev.us.nelnet.biz:10090/Nelnet/Commercial/QAJax/Inquiry/GetBorrowerHis
 */
 
 
-var Resolver = (id) => {
+let Resolver = (id) => {
 
-    var options = {
+    let options = {
         hostname: "itidev.us.nelnet.biz",
         port: 10090
     };
 
 
-    var GetPromise = (options, id, path) => {
+    let GetPromise = (options, id, path) => {
         return new Promise((resolve, reject) => {
             http.get(options, (response) => {
                 var completeResponse = '';
