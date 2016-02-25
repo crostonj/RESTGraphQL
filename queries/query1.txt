@@ -1,0 +1,44 @@
+{
+  iBorrower(id: "528895646") {
+    _borrower_id,
+    FIRSTNAME
+    LASTNAME
+    DATEOFBIRTH
+    ADDRESSES {
+      ADDRESS1
+      ADDRESS2
+      CITY
+      STATE
+      ZIP
+    }
+    PHONES {
+      AREACODE
+      NUMBER
+      CELLPHONECONSENT
+    },
+    EMAILS{
+      ADDRESS,
+      DATECREATED
+    }
+    HISTORY(count:10){
+      CODE,
+      TEXT,
+      TIME
+    }
+  }
+  Borrower(id:"528895646"){
+    Ssn,
+    FirstName,
+    LastName,
+    Loans{
+      AccountNumber,
+      OutstandingInterest,
+      CurrentPrincipal
+    }
+    
+  }
+  Book(id:"50"){
+    title,
+    image_url
+  }
+}

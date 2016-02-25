@@ -12,8 +12,8 @@ import xml2json from 'xml2js';
 import http from 'http';
 
 
-import bookType from './Types/book.js';
-import borrowerType from './Types/borrower.js';
+import bookType from './Types/goodreads/book.js';
+import borrowerType from './Types/workspace/borrower.js';
 import iBorrowerType from './Types/iseries/borrowerInfo.js';
 import Resolver from './resolver.js';
 
