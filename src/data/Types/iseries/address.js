@@ -8,7 +8,7 @@ GraphQLList
 
 //import Resolver from '../../resolver.js'
 
-let iAddressType = new GraphQLObjectType({
+let addressType = new GraphQLObjectType({
     name: 'ADDRESS',
     fields: () => ({
         ACTIVE: { type: GraphQLString },
@@ -39,4 +39,4 @@ let iAddressType = new GraphQLObjectType({
 
 });
 
-export default iAddressType;
+export default addressType;

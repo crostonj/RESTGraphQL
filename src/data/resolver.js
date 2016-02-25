@@ -32,7 +32,7 @@ var Resolver = (id) => {
                 response.on('end', () => {
                     parser.parseString(completeResponse, (err, result) => {
                         let pathElements = path.split('.');
-                        //result[pathElements[0]][pathElements[1]['id']] = id;
+                        result[pathElements[0]][pathElements[1]]._borrower_id = id;
                         resolve(result[pathElements[0]][pathElements[1]]);
                     });
                 });
@@ -46,21 +46,21 @@ var Resolver = (id) => {
     }
 
     let Address = () => {
-         options.path = '/Nelnet/Commercial/QAJax/Inquiry/GetBorrowerAddress/' + '528895646' + '/All';
+         options.path = '/Nelnet/Commercial/QAJax/Inquiry/GetBorrowerAddress/' + id + '/All';
         return GetPromise(options, id, 'getborroweraddressResult.ADDRESS');
     };
 
     let Phone = () => {
-         options.path = '/Nelnet/Commercial/QAJax/Inquiry/GetBorrowerPhone/' + '528895646' + '/All';
+         options.path = '/Nelnet/Commercial/QAJax/Inquiry/GetBorrowerPhone/' + id+ '/All';
         return GetPromise(options, id, 'getborrowerphoneResult.PHONE');
     };
      let History = (count) => {
-         options.path = '/Nelnet/Commercial/QAJax/Inquiry/GetBorrowerHistory/' + '528895646' + '/All/All/' + count;
+         options.path = '/Nelnet/Commercial/QAJax/Inquiry/GetBorrowerHistory/' + id + '/All/All/' + count;
         return GetPromise(options, id, 'wsgbhisRTVBORRHISTORYResult.BORROWERHISTORY');
     };
     
     let Email = () => {
-         options.path = '/Nelnet/Commercial/QAJax/Inquiry/GetBorrowerEmail/' + '528895646' + '/All';
+         options.path = '/Nelnet/Commercial/QAJax/Inquiry/GetBorrowerEmail/' + id + '/All';
         return GetPromise(options, id, 'getborroweremailResult.EMAIL');
     };
     return {

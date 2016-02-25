@@ -7,7 +7,7 @@ GraphQLList
 } from 'graphql';
 
 import Resolver from '../../resolver.js'
-import iAddressType from './address.js'
+import addressType from './address.js'
 import phoneType from './phone.js'
 import historyType from './history.js'
 import emailType from './email.js'
@@ -15,7 +15,7 @@ import emailType from './email.js'
 let iBorrowerType = new GraphQLObjectType({
     name: 'BORROWERINFO',
     fields: () => ({
-        id: {type: GraphQLInt },
+        _borrower_id: {type: GraphQLInt },
         DATERECORDADDED: { type: GraphQLString },
         SCHOOLCODE: { type: GraphQLString },
         LASTNAME: { type: GraphQLString },
@@ -36,19 +36,19 @@ let iBorrowerType = new GraphQLObjectType({
         GRADSEPDATE: { type: GraphQLString },
         ENROLLMENTSOURCE: { type: GraphQLString },
         ADDRESSES: {
-            type: new GraphQLList(iAddressType),
+            type: new GraphQLList(addressType),
             resolve(obj, args, ast){
-                return Resolver(obj.id).Address();
+                return Resolver(obj._borrower_id).Address();
         }},
         PHONES: {
             type: new GraphQLList(phoneType),
             resolve(obj, args, ast){
-                return Resolver(obj.id).Phone();
+                return Resolver(obj._borrower_id).Phone();
         }},
         EMAILS: {
             type: new GraphQLList(emailType),
             resolve(obj, args, ast){
-                return Resolver(obj.id).Email();
+                return Resolver(obj._borrower_id).Email();
         }},
         HISTORY: {
             type: new GraphQLList(historyType),
@@ -59,7 +59,7 @@ let iBorrowerType = new GraphQLObjectType({
                 }
             },
             resolve(obj, args, ast){
-                return Resolver(obj.id).History(args.count);
+                return Resolver(obj._borrower_id).History(args.count);
         }}
         
     })
