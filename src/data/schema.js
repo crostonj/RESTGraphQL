@@ -7,7 +7,7 @@ GraphQLList,
 GraphQLString
 } from 'graphql';
 
-import axios from 'Axios';
+
 import rootQuery from './rootQuery.js';
 
 let Schema = (id) => {
