@@ -17,7 +17,8 @@ http://itidev.us.nelnet.biz:10090/Nelnet/Commercial/QAJax/Inquiry/GetBorrowerHis
 let Resolver = (id) => {
 
     let options = {
-        hostname: "itidev.us.nelnet.biz",
+        //hostname: "itidev.us.nelnet.biz",
+        hostname: "10.80.1.253",
         port: 10090
     };
 
