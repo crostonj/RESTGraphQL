@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "GraphQL Server Test",
   "main": "lib/app.js",
+  "config" : { "port" : "4000" },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./lib/app.js",
-    "debug-start": "node --debug ./lib/app.js",
-    "debug": "node-debug ./lib/app.js"
+    "start": "node ./lib/app.js $npm_package_config_port"
   },
   "repository": {
     "type": "git",
