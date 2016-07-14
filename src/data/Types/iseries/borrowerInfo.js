@@ -6,12 +6,11 @@ GraphQLNonNull,
 GraphQLList
 } from 'graphql';
 
-import Resolver from '../../resolver.js';
-import addressType from './address.js';
-import phoneType from './phone.js';
-import historyType from './history.js';
-import emailType from './email.js';
-import nodeInterface from '../schema';
+import Resolver from '../../resolver.js'
+import addressType from './address.js'
+import phoneType from './phone.js'
+import historyType from './history.js'
+import emailType from './email.js'
 
 let iBorrowerType = new GraphQLObjectType({
     name: 'BORROWERINFO',
@@ -63,8 +62,7 @@ let iBorrowerType = new GraphQLObjectType({
                 return Resolver(obj._borrower_id).History(args.count);
         }}
         
-    }),
-     interfaces: [nodeInterface]
+    })
 });
 
 export default iBorrowerType;

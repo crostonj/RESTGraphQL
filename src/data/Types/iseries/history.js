@@ -7,15 +7,6 @@ GraphQLNonNull,
 GraphQLList
 } from 'graphql';
 
-import {
-  globalIdField,
-  fromGlobalId,
-  nodeDefinitions,
-  connectionDefinitions,
-  connectionArgs,
-  connectionFromPromisedArray,
-  mutationWithClientMutationId
-} from "graphql-relay";
 
 let historyType = new GraphQLObjectType({
     name: 'BORROWERHISTORY',
@@ -37,10 +28,5 @@ let historyType = new GraphQLObjectType({
         USER: { type: GraphQLString },
     })
 });
-
-let historyConnection = connectionDefinitions({
-    name: 'Link',
-    nodeType: historyType
-  });
 
 export default historyType;
